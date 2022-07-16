@@ -1,9 +1,9 @@
 package com.authservice.security;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -16,15 +16,19 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
-@RequiredArgsConstructor
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
-
-    private final JwtAuthenticationEntryPoint jwtAuthenticationEntityPoint;
-    private final JwtRequestFilter jwtRequestFilter;
-    private final UserDetailsService jwtService;
+	
+	@Autowired
+    private JwtAuthenticationEntryPoint jwtAuthenticationEntityPoint;
+	
+	@Autowired  
+    private JwtRequestFilter jwtRequestFilter;
+	
+	@Autowired
+    private  UserDetailsService jwtService;
 
     @Bean
-    @Override
+    @Override 
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
@@ -52,7 +56,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
     @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder builder) throws Exception {
+    public void configureGlobal(@Lazy AuthenticationManagerBuilder builder) throws Exception {
         builder.userDetailsService(jwtService).passwordEncoder(passwordEncoder());
     }
 }

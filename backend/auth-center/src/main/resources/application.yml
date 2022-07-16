@@ -13,7 +13,8 @@ spring:
       discovery:
         enabled: true
         service-id: config-server
-
+  main:
+    allow-circular-references: true     
 
     #function:
      # defination: userCreatedOutput

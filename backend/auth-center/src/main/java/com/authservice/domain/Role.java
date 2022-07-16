@@ -1,17 +1,9 @@
 package com.authservice.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
 @Table(name = "roles")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class Role {
 
     @Id
@@ -20,4 +12,30 @@ public class Role {
 
     private String roleDescription;
 
+    public Role() {
+    	
+    }
+    
+	public Role(String roleName, String roleDescription) {
+		super();
+		this.roleName = roleName;
+		this.roleDescription = roleDescription;
+	}
+
+	public String getRoleName() {
+		return roleName;
+	}
+
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
+	}
+
+	public String getRoleDescription() {
+		return roleDescription;
+	}
+
+	public void setRoleDescription(String roleDescription) {
+		this.roleDescription = roleDescription;
+	}
+  
 }

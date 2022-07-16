@@ -3,19 +3,22 @@ package com.authservice.controllers;
 import com.authservice.domain.AuthRequest;
 import com.authservice.domain.AuthResponse;
 import com.authservice.domain.User;
-import com.authservice.domain.UserEvent;
 import com.authservice.security.JwtUserDetailService;
 import com.authservice.services.UserService;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 //import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequiredArgsConstructor
 public class AuthController {
-
-    private final JwtUserDetailService userDetailService;
-    private final UserService userService;
+	
+	@Autowired
+    private JwtUserDetailService userDetailService;
+	
+	@Autowired  @Lazy
+    private UserService userService;
+	
 //    private final StreamBridge streamBridge;
 
     static final String USER_CREATED_OUTPUT = "userCreatedOutput";

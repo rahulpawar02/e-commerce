@@ -32,9 +32,9 @@ spring:
       - id: order-service
         uri: lb://order-service
         predicates:
-        - Path=/course/**
+        - Path=/order/**
         filters:
-        - RewritePath=/course/(?<path>.*), /$\{path}
+        - RewritePath=/order/(?<path>.*), /$\{path}
         - RemoveRequestHeader= Cookie,Set-Cookie
 
       - id: auth-service
